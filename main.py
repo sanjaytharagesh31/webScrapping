@@ -16,7 +16,7 @@ t.align["Last Station"] = "l"
 t.align["Updated on"] = "l"
 def getStatus():
   for i in train:
-    url = "https://enquiry.indianrail.gov.in/xyzabc/SelectedDateOfTrain?trainNo="+i+"&startDate="+todayDate+"&journeyStn=ETMD&journeyDate="+todayDate+"&boardDeboard=0&langFile=props.en-us"
+    #url = "https://enquiry.indianrail.gov.in/xyzabc/SelectedDateOfTrain?trainNo="+i+"&startDate="+todayDate+"&journeyStn=ETMD&journeyDate="+todayDate+"&boardDeboard=0&langFile=props.en-us"
     page = requests.get(url)
     page_content = BeautifulSoup(page.content,'html.parser')
 
