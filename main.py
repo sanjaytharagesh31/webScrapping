@@ -5,18 +5,27 @@ from datetime import datetime
 from bs4 import BeautifulSoup
 from prettytable import PrettyTable
 
-train = ["56712", "66606", "56604", "56650", "66608", "66604", "56324"]
-#onStation = "ETMD"
+def selectStation():
+  print("1. From Ettimadai to Coimbatore")
+  print("2. From Coimbatore to Ettimadai")
+  i = int(input())
+  if (i == 1):
+    train = ["56712", "66606", "56604", "56650", "66608", "66604", "56324"]
+    onStation = "ETMD"
+  else:
+    train = ["56323", "66605", "66609", "56651", "56605", "66607", "56713"]
+    onStation = "CBE"
+  getStatus(train, onStation)
 date = str(datetime.today())
 todayDate = date[8:10]+"/"+date[5:7]+"/"+date[:4]
-t = PrettyTable (["Train", "Expc Arrival", "Last Station", "Updated on" ])
+t = PrettyTable (["Train", "Expc Arrival@Ettimadai", "Last Station", "Updated on" ])
 t.align["Train"] = "l"
 t.align["Expc Arrival"] = "l"
 t.align["Last Station"] = "l"
 t.align["Updated on"] = "l"
-def getStatus():
+def getStatus(train, onStation):
   for i in train:
-    #url = "https://enquiry.indianrail.gov.in/xyzabc/SelectedDateOfTrain?trainNo="+i+"&startDate="+todayDate+"&journeyStn=ETMD&journeyDate="+todayDate+"&boardDeboard=0&langFile=props.en-us"
+    #url = "https://enquiry.indianrail.gov.in/xyzabc/SelectedDateOfTrain?trainNo="+i+"&startDate="+todayDate+"&journeyStn="+onStation+"&journeyDate="+todayDate+"&boardDeboard=0&langFile=props.en-us"
     page = requests.get(url)
     page_content = BeautifulSoup(page.content,'html.parser')
 
@@ -44,6 +53,7 @@ def getStatus():
       t.add_row([i, "NA", "NA", "NA"])
 
 print ("Current Status of trains from Ettimadai to Coimbatore Jn")
-getStatus()
+
+selectStation()
     
 print (t)
