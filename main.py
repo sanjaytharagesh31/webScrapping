@@ -1,4 +1,4 @@
-#python script to extract the status of trains from Ettimadai to Coimbatore Jn 
+#python script to scrap train status
 import datetime
 import requests
 from datetime import datetime
