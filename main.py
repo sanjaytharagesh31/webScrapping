@@ -6,6 +6,7 @@ from bs4 import BeautifulSoup
 from prettytable import PrettyTable
 
 def selectStation():
+  print ("Select your preference.")
   print("1. From Ettimadai to Coimbatore")
   print("2. From Coimbatore to Ettimadai")
   i = int(input())
@@ -51,8 +52,6 @@ def getStatus(train, onStation):
       t.add_row([i, arrival_time, curstation_id, last_updatetime_id])
     else:
       t.add_row([i, "NA", "NA", "NA"])
-
-print ("Current Status of trains from Ettimadai to Coimbatore Jn")
 
 selectStation()
     
