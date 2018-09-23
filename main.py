@@ -1,22 +1,34 @@
 #python script to scrap train status
 import datetime
 import requests
+import sys
 from datetime import datetime
 from bs4 import BeautifulSoup
 from prettytable import PrettyTable
 
 def selectStation():
-  print ("Select your preference.")
-  print("1. From Ettimadai to Coimbatore")
-  print("2. From Coimbatore to Ettimadai")
-  i = int(input())
-  if (i == 1):
-    train = ["56712", "66606", "56604", "56650", "66608", "66604", "56324"]
-    onStation = "ETMD"
-  else:
-    train = ["56323", "66605", "66609", "56651", "56605", "66607", "56713"]
-    onStation = "CBE"
-  getStatus(train, onStation)
+  i = 1
+  while(i != 3) :
+    print ("Select your preference.")
+    print("1. From Ettimadai to Coimbatore")
+    print("2. From Coimbatore to Ettimadai")
+    print("3. Exit")
+
+    i = int(input())
+    if (i == 1):
+      train = ["56712", "66606", "56604", "56650", "66608", "66604", "56324"]
+      onStation = "ETMD"
+      
+    elif(i==2):
+      train = ["56323", "66605", "66609", "56651", "56605", "66607", "56713"]
+      onStation = "CBE"
+
+    else :
+      sys.exit()
+    getStatus(train, onStation)
+    print (t)
+
+	
 date = str(datetime.today())
 todayDate = date[8:10]+"/"+date[5:7]+"/"+date[:4]
 t = PrettyTable (["Train", "Expc Arrival@Ettimadai", "Last Station", "Updated on" ])
@@ -24,9 +36,11 @@ t.align["Train"] = "l"
 t.align["Expc Arrival"] = "l"
 t.align["Last Station"] = "l"
 t.align["Updated on"] = "l"
+
+
 def getStatus(train, onStation):
   for i in train:
-    #url = "https://enquiry.indianrail.gov.in/xyzabc/SelectedDateOfTrain?trainNo="+i+"&startDate="+todayDate+"&journeyStn="+onStation+"&journeyDate="+todayDate+"&boardDeboard=0&langFile=props.en-us"
+    url = "https://enquiry.indianrail.gov.in/xyzabc/SelectedDateOfTrain?trainNo="+i+"&startDate="+todayDate+"&journeyStn="+onStation+"&journeyDate="+todayDate+"&boardDeboard=0&langFile=props.en-us"
     page = requests.get(url)
     page_content = BeautifulSoup(page.content,'html.parser')
 
@@ -54,5 +68,3 @@ def getStatus(train, onStation):
       t.add_row([i, "NA", "NA", "NA"])
 
 selectStation()
-    
-print (t)
